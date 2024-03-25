@@ -349,18 +349,7 @@ def check(sess_id: str, session: requests.session):
 # 发送 Telegram 通知
 def telegram():
     message = (
-        "<b>AutoEUServerless 日志</b>\n\n" + desp +
-        "\n<b>版权声明：</b>\n"
-        "本脚本基于 GPL-3.0 许可协议，版权所有。\n\n"
-        
-        "<b>致谢：</b>\n"
-        "特别感谢 <a href='https://github.com/lw9726/eu_ex'>eu_ex</a> 的贡献和启发, 本项目在此基础整理。\n"
-        "开发者：<a href='https://github.com/lw9726/eu_ex'>WizisCool</a>\n"
-        "<a href='https://www.nodeseek.com/space/8902#/general'>个人Nodeseek主页</a>\n"
-        "<a href='https://dooo.ng'>个人小站Dooo.ng</a>\n\n"
-        "<b>支持项目：</b>\n"
-        "⭐️ 给我们一个 GitHub Star! ⭐️\n"
-        "<a href='https://github.com/WizisCool/AutoEUServerless'>访问 GitHub 项目</a>"
+        "<b>AutoEUServerless 日志</b>\n\n" + desp
     )
 
     # 请不要删除本段版权声明, 开发不易, 感谢! 感谢!

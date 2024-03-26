@@ -349,7 +349,7 @@ def check(sess_id: str, session: requests.session):
 # 发送 Telegram 通知
 def telegram():
     message = (
-        "<b>AutoEUserv续期日志</b>\n" + desp
+        "<b>AutoEUserv续期日志</b>\n\n" + desp
     )
 
     # 请不要删除本段版权声明, 开发不易, 感谢! 感谢!

@@ -385,9 +385,8 @@ def main_handler(event, context):
         log("[EUserv] mailparser_dl_url_ids 和用户名的数量不匹配!")
         exit(1)
     for i in range(len(user_list)):
-        userId = user_list[i]
         log("*" * 30)
-        log("[EUserv] 正在续费第 %d 个账号" % (i + 1, userId))
+        log("[EUserv] 正在续费第 %d 个账号" % (i + 1))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":
             log("[EUserv] 第 %d 个账号登陆失败，请检查登录信息" % (i + 1))

@@ -56,10 +56,10 @@ def log(info: str):
         "正在续费": "🔄",
         "检测到": "🔍",
         "ServerID": "🔗",
-        "无需更新": "✅",
-        "续订错误": "⚠️",
-        "已成功续订": "🎉",
-        "所有工作完成": "🏁",
+        "无需续期": "✅",
+        "德鸡中弹倒地": "⚠️",
+        "德鸡续期成功": "🎉",
+        "ALL Work Done": "🏁",
         "登陆失败": "❗",
         "验证通过": "✔️",
         "验证失败": "❌",
@@ -341,7 +341,7 @@ def check(sess_id: str, session: requests.session):
     for key, val in d.items():
         if val:
             flag = False
-            log("[EUserv] ServerID: %s 续期失败!" % key)
+            log("[EUserv] ServerID: %s 德鸡中弹倒地!" % key)
 
     if flag:
         log("[EUserv] ALL Work Done！Enjoy~")
@@ -349,7 +349,7 @@ def check(sess_id: str, session: requests.session):
 # 发送 Telegram 通知
 def telegram():
     message = (
-        "<b>AutoEUserv续期日志</b>\n\n" + desp
+        "<b>AutoEUserv续期日志</b>\n" + desp
     )
 
     # 请不要删除本段版权声明, 开发不易, 感谢! 感谢!
@@ -385,8 +385,9 @@ def main_handler(event, context):
         log("[EUserv] mailparser_dl_url_ids 和用户名的数量不匹配!")
         exit(1)
     for i in range(len(user_list)):
+        userId = user_list[i]
         log("*" * 30)
-        log("[EUserv] 正在续期第 %d 个账号" % (i + 1, EUSERV_USERNAME))
+        log("[EUserv] 正在续费第 %d 个账号" % (i + 1, userId))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":
             log("[EUserv] 第 %d 个账号登陆失败，请检查登录信息" % (i + 1))

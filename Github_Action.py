@@ -386,7 +386,7 @@ def main_handler(event, context):
         exit(1)
     for i in range(len(user_list)):
         log("*" * 30)
-        log("[EUserv] 正在续期第 %d 个账号" % (i + 1, userId))
+        log("[EUserv] 正在续期第 %d 个账号" % (i + 1, EUSERV_USERNAME))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":
             log("[EUserv] 第 %d 个账号登陆失败，请检查登录信息" % (i + 1))

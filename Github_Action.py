@@ -386,7 +386,7 @@ def main_handler(event, context):
         exit(1)
     for i in range(len(user_list)):
         log("*" * 30)
-        log("[EUserv] 正在续费第 %d 个账号" % (i + 1))
+        log("[EUserv] 正在续期第 %d 个账号" % (i + 1, userId))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":
             log("[EUserv] 第 %d 个账号登陆失败，请检查登录信息" % (i + 1))
@@ -396,11 +396,11 @@ def main_handler(event, context):
         for k, v in SERVERS.items():
             if v:
                 if not renew(sessid, s, passwd_list[i], k, mailparser_dl_url_id_list[i]):
-                    log("[EUserv] ServerID: %s 续订错误!" % k)
+                    log("[EUserv] ServerID: %s 德鸡中弹倒地!" % k)
                 else:
-                    log("[EUserv] ServerID: %s 已成功续订!" % k)
+                    log("[EUserv] ServerID: %s 德鸡续期成功!" % k)
             else:
-                log("[EUserv] ServerID: %s 无需更新" % k)
+                log("[EUserv] ServerID: %s 无需续期" % k)
         time.sleep(15)
         check(sessid, s)
         time.sleep(5)

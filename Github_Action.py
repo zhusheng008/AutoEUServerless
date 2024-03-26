@@ -344,12 +344,12 @@ def check(sess_id: str, session: requests.session):
             log("[EUserv] ServerID: %s 续期失败!" % key)
 
     if flag:
-        log("[EUserv] 所有工作完成！尽情享受~")
+        log("[EUserv] ALL Work Done！Enjoy~")
 
 # 发送 Telegram 通知
 def telegram():
     message = (
-        "<b>AutoEUserv续期日志</b>\n" + desp
+        "<b>AutoEUserv续期日志</b>\n\n" + desp
     )
 
     # 请不要删除本段版权声明, 开发不易, 感谢! 感谢!
@@ -385,7 +385,7 @@ def main_handler(event, context):
         log("[EUserv] mailparser_dl_url_ids 和用户名的数量不匹配!")
         exit(1)
     for i in range(len(user_list)):
-        print("*" * 30)
+        log("*" * 30)
         log("[EUserv] 正在续费第 %d 个账号" % (i + 1))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":

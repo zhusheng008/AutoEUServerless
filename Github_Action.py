@@ -68,7 +68,7 @@ def log(info: str):
         "登录尝试": "🔑",
         "[MailParser]": "📧",
         "[Captcha Solver]": "🧩",
-        "[AutoEUServerless]": "🌐",
+        "[EUserv]": "🌐",
     }
     # 对每个关键字进行检查，并在找到时添加 emoji
     for key, emoji in emoji_map.items():
@@ -78,7 +78,7 @@ def log(info: str):
 
     print(info)
     global desp
-    desp += info + "\n\n"
+    desp += info + "\n"
 
 
 # 登录重试装饰器
@@ -95,7 +95,7 @@ def login_retry(*args, **kwargs):
                 while number < max_retry:
                     number += 1
                     if number > 1:
-                        log("[AutoEUServerless] 登录尝试第 {} 次".format(number))
+                        log("[EUserv] 登录尝试第 {} 次".format(number))
                     sess_id, session = func(username, password)
                     if sess_id != "-1":
                         return sess_id, session
@@ -341,15 +341,15 @@ def check(sess_id: str, session: requests.session):
     for key, val in d.items():
         if val:
             flag = False
-            log("[AutoEUServerless] ServerID: %s 续期失败!" % key)
+            log("[EUserv] ServerID: %s 续期失败!" % key)
 
     if flag:
-        log("[AutoEUServerless] 所有工作完成！尽情享受~")
+        log("[EUserv] 所有工作完成！尽情享受~")
 
 # 发送 Telegram 通知
 def telegram():
     message = (
-        "<b>AutoEUServerless 日志</b>\n\n" + desp
+        "<b>AutoEUserv续期日志</b>\n" + desp
     )
 
     # 请不要删除本段版权声明, 开发不易, 感谢! 感谢!
@@ -373,34 +373,34 @@ def telegram():
 def main_handler(event, context):
     # 主函数，处理每个账户的续期# 
     if not USERNAME or not PASSWORD:
-        log("[AutoEUServerless] 你没有添加任何账户")
+        log("[EUserv] 你没有添加任何账户")
         exit(1)
     user_list = USERNAME.strip().split()
     passwd_list = PASSWORD.strip().split()
     mailparser_dl_url_id_list = MAILPARSER_DOWNLOAD_URL_ID.strip().split()
     if len(user_list) != len(passwd_list):
-        log("[AutoEUServerless] 用户名和密码数量不匹配!")
+        log("[EUserv] 用户名和密码数量不匹配!")
         exit(1)
     if len(mailparser_dl_url_id_list) != len(user_list):
-        log("[AutoEUServerless] mailparser_dl_url_ids 和用户名的数量不匹配!")
+        log("[EUserv] mailparser_dl_url_ids 和用户名的数量不匹配!")
         exit(1)
     for i in range(len(user_list)):
         print("*" * 30)
-        log("[AutoEUServerless] 正在续费第 %d 个账号" % (i + 1))
+        log("[EUserv] 正在续费第 %d 个账号" % (i + 1))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":
-            log("[AutoEUServerless] 第 %d 个账号登陆失败，请检查登录信息" % (i + 1))
+            log("[EUserv] 第 %d 个账号登陆失败，请检查登录信息" % (i + 1))
             continue
         SERVERS = get_servers(sessid, s)
-        log("[AutoEUServerless] 检测到第 {} 个账号有 {} 台 VPS，正在尝试续期".format(i + 1, len(SERVERS)))
+        log("[EUserv] 检测到第 {} 个账号有 {} 台 VPS，正在尝试续期".format(i + 1, len(SERVERS)))
         for k, v in SERVERS.items():
             if v:
                 if not renew(sessid, s, passwd_list[i], k, mailparser_dl_url_id_list[i]):
-                    log("[AutoEUServerless] ServerID: %s 续订错误!" % k)
+                    log("[EUserv] ServerID: %s 续订错误!" % k)
                 else:
-                    log("[AutoEUServerless] ServerID: %s 已成功续订!" % k)
+                    log("[EUserv] ServerID: %s 已成功续订!" % k)
             else:
-                log("[AutoEUServerless] ServerID: %s 无需更新" % k)
+                log("[EUserv] ServerID: %s 无需更新" % k)
         time.sleep(15)
         check(sessid, s)
         time.sleep(5)
